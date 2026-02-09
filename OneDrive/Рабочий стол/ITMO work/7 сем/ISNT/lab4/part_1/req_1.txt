@@ -1,0 +1,10 @@
+[out:json][timeout:25];
+area[name="Санкт-Петербург"]->.spb;
+area[name="Центральный район"]->.central_district;
+
+node(area.spb)[name="Булочные Ф. Вольчека"]->.bakeries_in_spb;
+node(area.central_district)[name="Булочные Ф. Вольчека"]->.bakeries_in_central;
+
+node.bakeries_in_spb.bakeries_in_central->.target;
+
+.target out;

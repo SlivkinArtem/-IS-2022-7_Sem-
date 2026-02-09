@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reception.UI</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Регистратура</h1>
+    <p class="muted"></p>
+
+    <div class="card">
+      <div class="grid-2">
+        <div>
+          <label>Имя</label>
+          <input id="first" type="text" placeholder="Ivan" />
+        </div>
+        <div>
+          <label>Фамилия</label>
+          <input id="last" type="text" placeholder="Petrov" />
+        </div>
+      </div>
+      <div class="mt-12">
+        <label>Дата рождения</label>
+        <input id="dob" type="date" />
+      </div>
+      <button id="send" class="mt-12">Зарегистрировать пациента</button>
+      <div id="status" class="mt-8 pill">Готово к вводу</div>
+    </div>
+
+    <h2>Последние HL7</h2>
+    <div class="card">
+      <button id="loadHL7" class="btn-secondary">Показать</button>
+      <div id="hl7" class="mt-12"></div>
+    </div>
+  </div>
+
+<script>
+async function register(){
+  const first = document.getElementById('first').value.trim();
+  const last  = document.getElementById('last').value.trim();
+  const dob   = document.getElementById('dob').value;
+  if(!first||!last||!dob){ alert('Заполните все поля'); return; }
+  const res = await fetch('/api/register',{
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({first_name:first, last_name:last, dob})
+  });
+  const data = await res.json();
+  document.getElementById('status').textContent = 'OK: id='+data.id;
+  document.getElementById('status').classList.add('mono');
+}
+
+async function loadHL7(){
+  const res = await fetch('/api/hl7/last?n=5');
+  const items = await res.json();
+  const box = document.getElementById('hl7');
+  box.innerHTML = '';
+  items.forEach((it)=>{
+    const pre = document.createElement('pre');
+    pre.textContent = `[${it.created_at}]\n`+it.raw;
+    box.appendChild(pre);
+  });
+}
+
+document.getElementById('send').addEventListener('click', register);
+document.getElementById('loadHL7').addEventListener('click', loadHL7);
+</script>
+</body>
+</html>

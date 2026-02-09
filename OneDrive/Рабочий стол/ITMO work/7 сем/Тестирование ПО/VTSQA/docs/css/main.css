@@ -1,0 +1,150 @@
+table.menu{
+	background-color : F1F1F1;
+	border-bottom : 1px solid;
+	border-top : 1px solid;
+	border-color : 999999;
+}
+
+table.submenu{
+	background-color : F1F1F1;
+	border-bottom : 1px solid;
+	border-top : 1px none;
+	border-color : 999999;
+}
+
+table.coloumn {
+	border-top : 1px dashed GReen;
+}
+
+td {
+	font-family : Verdana, Tahoma;
+	font-size : 8pt;
+}
+
+.current{
+	font-family : Verdana, Tahoma;
+	font-size : 8pt;
+	color : Black;
+	border-width : 1px;
+	border : 1px solid Black;
+	padding-bottom : 1;
+	padding-top : 1;
+	padding-left : 6;
+	padding-right : 6;
+	border-color : #2174B1;
+	width : 100%;
+	background-color : #93CDEC;
+}
+
+a{
+	font-family : Verdana, Tahoma;
+	font-size : 8pt;
+	color : 003399;
+}
+
+a:hover{
+	font-family : Verdana, Tahoma;
+	font-size : 8pt;
+	color : Red;
+}
+
+a.menu{
+	font-family : Verdana, Tahoma;
+	font-size : 8pt;
+	padding-bottom : 1;
+	padding-top : 1;
+	padding-left : 6;
+	padding-right : 6;
+	border : 1px solid F1F1F1;
+	color : Black;
+	width : 100%;
+}
+
+a.menu:hover{
+	font-family : Verdana, Tahoma;
+	font-size : 8pt;
+	color : Black;
+	border-width : 1px;
+	border : 1px solid Black;
+	padding-bottom : 1;
+	padding-top : 1;
+	padding-left : 6;
+	padding-right : 6;
+	background-color : CCCCCC;
+	border-color : 999999;
+	width : 100%;
+}
+
+a.menu_2{
+	font-family : Verdana, Tahoma;
+	font-size : 8pt;
+	padding-bottom : 1;
+	padding-top : 1;
+	padding-left : 6;
+	padding-right : 6;
+	border : 1px solid #FFF146;
+	color : Black;
+	width : 100%;
+	background-color : #FFFABB;
+}
+
+a.menu_2:hover{
+	font-family : Verdana, Tahoma;
+	font-size : 8pt;
+	color : Black;
+	border-width : 1px;
+	border : 1px solid Black;
+	padding-bottom : 1;
+	padding-top : 1;
+	padding-left : 6;
+	padding-right : 6;
+	background-color : CCCCCC;
+	border-color : 999999;
+	width : 100%;
+}
+
+
+font.header{
+	font-family : Tahoma;
+	font-size : 16pt;
+	color : 0000AA;
+}
+
+font.topic {
+	font-family : Verdana, Tahoma;
+	font-size : 8pt;
+	color : 003399;
+	font-weight : bold;
+	text-decoration : underline;
+}
+
+font.inscription{
+	font-family : Tahoma;
+	font-size : 8pt;
+}
+
+
+img {
+	border : 0;
+}
+
+p{
+	font-family : Tahoma;
+	font-size : 10pt;
+	text-indent : 15;
+	padding-bottom : 2;
+	padding-left : 5;
+	padding-right : 5;
+	padding-top : 2;
+	margin-bottom : 2;
+	margin-left : 5;
+	margin-right : 5;
+	margin-top : 2;
+	text-align : justify;
+}
+
+p.right{
+	text-align : right;
+	text-decoration : none;
+	font-style : italic;
+}

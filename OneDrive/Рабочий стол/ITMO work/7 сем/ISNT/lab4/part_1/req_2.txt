@@ -1,0 +1,12 @@
+[out:json][timeout:25];
+area[name="Санкт-Петербург"]->.spb;
+area[name="Василеостровский район"]->.vaska;
+area.spb.vaska->.spb_vaska;
+
+way(area.spb)(area.vaska)[building="apartments"](if:number(t["building:levels"]) >= "5")->.apartments;
+
+node(area.spb)(area.vaska)[amenity="school"]->.schools;
+
+(way.apartments; node.schools;)->.target;
+
+.target out geom;

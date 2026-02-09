@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Reception • FHIR</title>
+  <link rel="stylesheet" href="/static/style.css"/>
+</head>
+<body>
+<div class="container">
+  <h1>Регистрация пациента (FHIR)</h1>
+  <div class="card">
+    <div class="grid-2">
+      <div>
+        <label>Имя</label>
+        <input id="first" type="text" placeholder="Иван"/>
+      </div>
+      <div>
+        <label>Фамилия</label>
+        <input id="last" type="text" placeholder="Иванов"/>
+      </div>
+    </div>
+    <label>Дата рождения</label>
+    <input id="dob" type="date"/>
+    <button id="btn">Зарегистрировать</button>
+    <div id="status" class="mt-12 muted"></div>
+  </div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+$('btn').onclick = async () => {
+  const first = $('first').value.trim();
+  const last  = $('last').value.trim();
+  const dob   = $('dob').value;
+
+  if (!first || !last || !dob) {
+    $('status').textContent = 'Заполни все поля';
+    return;
+  }
+
+  $('status').textContent = 'Отправляем FHIR';
+
+  const fhirPatient = {
+    resourceType: "Patient",
+    id: crypto.randomUUID(),
+    name: [
+      {
+        use: "official",
+        family: last,
+        given: [first]
+      }
+    ],
+    birthDate: dob
+  };
+
+  try {
+    const res = await fetch('/fhir/Patient', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/fhir+json' },
+      body: JSON.stringify(fhirPatient)
+    });
+
+    if (!res.ok) {
+      const err = await res.text();
+      $('status').textContent = 'Ошибка при отправке: ' + err;
+      return;
+    }
+
+    const data = await res.json();
+    $('status').textContent = `FHIR Patient успешно отправлен (${data.status || 'ok'})`;
+
+  } catch (e) {
+    $('status').textContent = 'Ошибка сети/TLS: ' + e;
+  }
+};
+</script>
+</body>
+</html>

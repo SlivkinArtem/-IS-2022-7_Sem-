@@ -1,0 +1,20 @@
+[out:json][timeout:120];
+
+area["boundary"="administrative"]["admin_level"="4"]["name"="Санкт-Петербург"]->.spb;
+
+(
+  node(area.spb)["name"="Исаакиевский собор"];
+  way(area.spb)["name"="Исаакиевский собор"];
+  relation(area.spb)["name"="Исаакиевский собор"];
+)->.isaac;
+
+(
+  node(around.isaac:500)["highway"="bus_stop"];
+  node(around.isaac:500)["public_transport"="platform"];
+  node(around.isaac:500)["public_transport"="stop_position"];
+)->.stops;
+
+// Маршруты автобусов, где эти остановки являются участниками
+relation(bn.stops)["type"="route"]["route"="bus"];
+
+out tags;

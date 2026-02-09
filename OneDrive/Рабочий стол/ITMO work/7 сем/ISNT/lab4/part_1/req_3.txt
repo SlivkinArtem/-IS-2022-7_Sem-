@@ -1,0 +1,17 @@
+[out:json][timeout:120];
+
+area["boundary"="administrative"]["admin_level"="4"]["name"="Санкт-Петербург"]->.spb;
+
+(
+  relation["type"="route"]["route"="subway"]["ref"="1"];
+  relation["type"="route"]["route"="subway"]["colour"="red"];
+)->.redline;
+
+(
+  node(r.redline)["railway"="station"]["station"="subway"];
+  node(r.redline)["public_transport"="stop_position"];
+)->.stops;
+
+nwr(around.stops:500)["shop"="books"](area.spb);
+
+out tags center;

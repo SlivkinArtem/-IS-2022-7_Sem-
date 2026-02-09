@@ -1,0 +1,13 @@
+[out:json][timeout:90];
+area["boundary"="administrative"]["admin_level"="4"]["name"="Санкт-Петербург"]->.spb;
+way(area.spb)["highway"]["name"="Невский проспект"]->.nevsky;
+node(area.spb)["amenity"="pharmacy"]->.ph;
+
+node(around.nevsky:100)
+  ["amenity"="atm"]
+  ["brand"~"Сбербанк|Sber",i]
+  ->.atm;
+
+node.atm(around.ph:100);
+
+out tags center;
